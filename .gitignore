@@ -1,0 +1,46 @@
+# Secrets — NEVER commit any of these
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Local user data
+coded_invoices.csv
+all_transactions.csv
+boundary_debug.txt
+extract_log.txt
+inspect_out.txt
+
+# Caches (contain real prediction / boundary data)
+*_cache.json
+classification_cache.json
+boundary_cache.json
+prediction_cache.json
+
+# Local test materials
+test invoices/
+
+# Build helpers with hardcoded internal paths
+extract_invoices.py
+inspect_pdf.py
+smoke_test.py
+_peek.py
+_search.py
+_test_repair.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
