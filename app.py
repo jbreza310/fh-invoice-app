@@ -53,20 +53,20 @@ LOG_FIELDS = [
 @st.cache_resource
 def get_client():
     import anthropic
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    api_key = None
+    try:
+        api_key = st.secrets.get("ANTHROPIC_API_KEY")
+    except Exception:
+        pass
     if not api_key:
-        try:
-            api_key = st.secrets["ANTHROPIC_API_KEY"]
-        except (KeyError, FileNotFoundError, AttributeError):
-            pass
+        api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         st.error(
-            "ANTHROPIC_API_KEY is not set. Provide it via .env, the "
-            "ANTHROPIC_API_KEY env var, or .streamlit/secrets.toml."
+            "ANTHROPIC_API_KEY is not set. Provide it via Streamlit secrets, "
+            "ANTHROPIC_API_KEY env var, or .env file."
         )
         st.stop()
     return anthropic.Anthropic(api_key=api_key)
-
 
 @st.cache_data
 def cached_reference_table() -> str:
