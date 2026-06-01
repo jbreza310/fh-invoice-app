@@ -114,6 +114,17 @@ RULES:
 4. BLANK PAGES belong to the preceding invoice unless they clearly sit between two unrelated vendors.
 5. COMPLETE COVERAGE: every page must belong to exactly one invoice. The first invoice MUST start at page 1; the last invoice MUST end at the total page count. No gaps. No overlaps.
 
+- EMPLOYEE REIMBURSEMENT RULE: When multiple employee expense 
+  reimbursement documents appear consecutively, each employee's 
+  submission is always a separate invoice. Different employee names 
+  mean different bundles. Never combine reimbursements from 
+  different employees into one bundle.
+
+- IMAGE PAGE INVOICE RULE: When vision is used to read a page and 
+  that page contains an invoice header, vendor name, and invoice 
+  number, it is always a NEW invoice start regardless of what 
+  precedes it. Image-rendered invoice pages are never continuations.
+
 LAWN SCHEDULE RULE (hard rule, no exceptions):
 - Every lawn-maintenance schedule page ("Lawn Maintenance/Landscaping Monthly Payments 2026" etc.) is ALWAYS its own invoice. Single page. Never combined with adjacent schedule pages.
 - Two consecutive lawn schedule pages with different contractor names (e.g., page 1 lists "DJ's Lawn Service", page 2 lists "Phoenix Landscape", page 3 lists "United Lawnscape") are ALWAYS three separate invoices, never one multi-page document.
