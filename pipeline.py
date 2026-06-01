@@ -132,6 +132,26 @@ LAWN SCHEDULE RULE (hard rule, no exceptions):
 - A lawn schedule page followed by another lawn schedule page → two separate invoices.
 - A lawn schedule page followed by anything other than a "UW " United Lawnscape invoice → the lawn schedule is one invoice, the next page starts whatever it starts.
 
+- VENDOR LETTERHEAD CHANGE RULE: When a page displays a vendor 
+  company name and logo in the header that clearly differs from 
+  the previous page's vendor, default to treating it as a NEW 
+  invoice start.
+
+  Exception — employee reimbursement backup: If the immediately 
+  preceding bundle is an employee reimbursement document, first 
+  check whether the vendor invoice amount matches any individual 
+  line item or the total amount on that reimbursement. If the 
+  amounts match, treat the vendor invoice as BACKUP supporting 
+  the reimbursement. If the amounts do not match, treat it as a 
+  NEW invoice regardless of proximity to the reimbursement.
+
+- CID/IMAGE PAGE PRIORITY RULE: When a page is provided as a 
+  vision image (because text extraction failed) and that image 
+  clearly shows vendor letterhead, a bold "Invoice" or "Bill" 
+  header, and an invoice number distinct from the preceding 
+  bundle, it is a NEW invoice. This rule takes priority over 
+  blank-page grouping and supporting-document rules.
+
 For each invoice, return:
 - start_page: 1-indexed starting page
 - end_page: 1-indexed ending page, inclusive (single-page invoices have end_page == start_page)
