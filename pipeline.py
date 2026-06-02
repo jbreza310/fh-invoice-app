@@ -168,10 +168,16 @@ def _boundary_prompt_version() -> str:
     ).hexdigest()[:12]
 
 
-def _boundary_cache_key(pages: list[str]) -> str:
-    """Key on the full document text + prompt version."""
+def _boundary_cache_key(pages: list[str], vision_pages: list[int]) -> str:
+    """Key on the full document text + prompt version + which pages were sent as images.
+
+    Including vision_pages means a stale text-only cached result is automatically
+    invalidated once the same PDF is re-processed with vision rendering enabled
+    (or with a different CID threshold that flags a different set of pages).
+    """
     sep = "\x1f"
-    payload = sep.join([_boundary_prompt_version(), *pages])
+    vision_marker = "vision:" + ",".join(str(p) for p in sorted(vision_pages))
+    payload = sep.join([_boundary_prompt_version(), vision_marker, *pages])
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
@@ -267,8 +273,13 @@ def find_invoice_boundaries(
 
     Cached by document text + prompt version, so re-runs on the same PDF are free.
     """
+    if file_bytes is not None:
+        vision_pages = sorted(i + 1 for i, text in enumerate(pages) if _needs_vision(text))
+    else:
+        vision_pages = []
+
     cache = _load_boundary_cache()
-    key = _boundary_cache_key(pages)
+    key = _boundary_cache_key(pages, vision_pages)
     cached = cache.get(key)
     if cached is not None:
         return InvoiceBoundaries.model_validate({"invoices": cached})
