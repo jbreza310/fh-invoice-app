@@ -152,6 +152,15 @@ LAWN SCHEDULE RULE (hard rule, no exceptions):
   bundle, it is a NEW invoice. This rule takes priority over 
   blank-page grouping and supporting-document rules.
 
+EXAMPLE OF A COMMON MISTAKE TO AVOID:
+WRONG grouping:
+  Bundle: pages 32-35, vendor=Dan Lauinger reimbursement
+CORRECT grouping:
+  Bundle 1: pages 32-34, vendor=Dan Lauinger (employee reimbursement with blank backup pages)
+  Bundle 2: page 35, vendor=Allstar Alarm LLC (separate vendor invoice — blank pages before it do not absorb it into the preceding bundle when it clearly shows different vendor letterhead)
+
+The rule: blank pages attach to the invoice BEFORE them, not the invoice AFTER them. A vendor invoice page following blank pages is always a new invoice start.
+
 For each invoice, return:
 - start_page: 1-indexed starting page
 - end_page: 1-indexed ending page, inclusive (single-page invoices have end_page == start_page)
